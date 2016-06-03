@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">MoviesPop</string>
+
     <string name="action_settings">Settings</string>
+
+
+    <!-- Strings related to Settings -->
+    <string name="pref_order_key">order</string>
+    <string name="pref_order_title">Order</string>
+    <string name="pref_order_label_highest_rated">Highest Rated</string>
+    <string name="pref_order_label_most_popular">Most Popular</string>
+
+    <string name="pref_order_most_popular">most_popular</string>
+    <string name="pref_order_highest_rated">highest_rated</string>
+    <string name="title_activity_settings">Settings</string>
+
 </resources>
