@@ -1,6 +1,7 @@
 package com.example.baresse.moviespop;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,17 +13,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static android.widget.ImageView.ScaleType.*;
+import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
 public class MoviesGridViewAdapter extends BaseAdapter {
 
+    private final String LOG_TAG = MoviesGridViewAdapter.class.getSimpleName();
     private final Context mContext;
+
     private final List<String> urls = new ArrayList<>();
 
-    MoviesGridViewAdapter(Context context) {
+    public MoviesGridViewAdapter(Context context) {
         mContext = context;
+    }
 
-        Collections.addAll(urls, Data.URLS);
+    public void setPosterUrls(String[] posterUrls) {
+        urls.clear();
+        Collections.addAll(urls, posterUrls);
+        Log.d(LOG_TAG, urls.toString());
+
+        this.notifyDataSetInvalidated();
     }
 
     @Override
