@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.example.baresse.moviespop.themoviedb.model.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -20,18 +21,22 @@ public class MoviesGridViewAdapter extends BaseAdapter {
     private final String LOG_TAG = MoviesGridViewAdapter.class.getSimpleName();
     private final Context mContext;
 
-    private final List<String> urls = new ArrayList<>();
+    private final List<Movie> movies = new ArrayList<>();
 
     public MoviesGridViewAdapter(Context context) {
         mContext = context;
     }
 
-    public void setPosterUrls(String[] posterUrls) {
-        urls.clear();
-        Collections.addAll(urls, posterUrls);
-        Log.d(LOG_TAG, urls.toString());
+    public void setMovies(Movie[] foundMovies) {
+        movies.clear();
+        Collections.addAll(movies, foundMovies);
+        Log.d(LOG_TAG, movies.toString());
 
         this.notifyDataSetInvalidated();
+    }
+
+    public Movie getMovie(int position) {
+        return movies.get(position);
     }
 
     @Override
@@ -61,12 +66,12 @@ public class MoviesGridViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return urls.size();
+        return movies.size();
     }
 
     @Override
     public String getItem(int position) {
-        return urls.get(position);
+        return movies.get(position).getPosterUrl();
     }
 
     @Override

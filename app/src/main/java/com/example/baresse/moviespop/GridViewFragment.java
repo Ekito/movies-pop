@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.example.baresse.moviespop.themoviedb.model.Movie;
+
 /**
  * A placeholder fragment containing a grid view.
  */
@@ -45,8 +47,11 @@ public class GridViewFragment extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                startActivity(new Intent(getActivity(), DetailMovieActivity.class));
-                //adapter.getItem(position).launch(PicassoSampleActivity.this);
+                Intent intent = new Intent(getActivity(), DetailMovieActivity.class);
+
+                Movie movie = mAdapter.getMovie(position);
+                intent.putExtra(DetailMovieActivity.MOVIE_ID, movie.getId());
+                startActivity(intent);
             }
         });
 

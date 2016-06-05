@@ -1,3 +1,3 @@
 package com.example.baresse.moviespop.themoviedb.model;
 
-public class MoviesResult extends Results<Movie> {}
+public class ReviewsResult extends Results<Review> {}

@@ -9,7 +9,7 @@ import com.example.baresse.moviespop.themoviedb.model.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FetchMoviesTask extends AsyncTask<Void, Void, String[]> {
+public class FetchMoviesTask extends AsyncTask<Void, Void, Movie[]> {
 
     private final Context mContext;
     private final MoviesGridViewAdapter mAdapter;
@@ -20,20 +20,20 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, String[]> {
     }
 
     @Override
-    protected String[] doInBackground(Void... params) {
+    protected Movie[] doInBackground(Void... params) {
         TheMoviesDbHelper helper = new TheMoviesDbHelper(mContext);
-        List<String> urls = new ArrayList<>();
 
-        for (Movie movie : helper.getMovies()) {
-            urls.add(movie.getPosterUrl());
+        List<Movie> movies = helper.getMovies();
+        if (movies == null) {
+            movies = new ArrayList<>();
         }
 
-        return urls.toArray(new String[0]);
+        return movies.toArray(new Movie[0]);
     }
 
     // onPostExecute displays the results of the AsyncTask.
     @Override
-    protected void onPostExecute(String[] result) {
-        mAdapter.setPosterUrls(result);
+    protected void onPostExecute(Movie[] result) {
+        mAdapter.setMovies(result);
     }
 }
