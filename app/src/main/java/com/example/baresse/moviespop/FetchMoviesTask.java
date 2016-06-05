@@ -3,6 +3,7 @@ package com.example.baresse.moviespop;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.baresse.moviespop.data.Cache;
 import com.example.baresse.moviespop.themoviedb.TheMoviesDbHelper;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
 
@@ -28,6 +29,7 @@ public class FetchMoviesTask extends AsyncTask<Void, Void, Movie[]> {
             movies = new ArrayList<>();
         }
 
+        Cache.setCachedMovies(movies);
         return movies.toArray(new Movie[0]);
     }
 
