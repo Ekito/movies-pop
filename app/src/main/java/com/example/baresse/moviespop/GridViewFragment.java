@@ -1,5 +1,6 @@
 package com.example.baresse.moviespop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -44,6 +45,7 @@ public class GridViewFragment extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                startActivity(new Intent(getActivity(), DetailMovieActivity.class));
                 //adapter.getItem(position).launch(PicassoSampleActivity.this);
             }
         });
