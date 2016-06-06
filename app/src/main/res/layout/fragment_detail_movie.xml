@@ -81,14 +81,11 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical">
 
-                <TextView
+                <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/synopsis_textView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="Large Text"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textIsSelectable="true"
-                    android:textSize="14sp" />
+                    ext:documentView_textAlignment="justified"/>
             </LinearLayout>
 
 

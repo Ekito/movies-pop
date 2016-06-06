@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bluejamesbond.text.DocumentView;
 import com.example.baresse.moviespop.data.Cache;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
 import com.squareup.picasso.Picasso;
@@ -22,8 +23,8 @@ public class DetailMovieActivityFragment extends Fragment {
     private ImageView mPosterView;
     private TextView mDateView;
     private TextView mRatingView;
-    private TextView mSynopsisView;
-
+    private DocumentView mSynopsisView;
+    
     public DetailMovieActivityFragment() {
     }
 
@@ -37,7 +38,7 @@ public class DetailMovieActivityFragment extends Fragment {
         mPosterView = (ImageView) rootView.findViewById(R.id.poster_imageView);
         mDateView = (TextView) rootView.findViewById(R.id.releaseDate_textView);
         mRatingView = (TextView) rootView.findViewById(R.id.rating_textView);
-        mSynopsisView = (TextView) rootView.findViewById(R.id.synopsis_textView);
+        mSynopsisView = (DocumentView) rootView.findViewById(R.id.synopsis_textView);
         updateUI();
 
         return rootView;
