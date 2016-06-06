@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
  */
 public class DetailMovieActivityFragment extends Fragment {
 
+    private Movie mMovie;
     private TextView mTitle;
     private ImageView mPosterView;
     private TextView mDateView;
@@ -37,18 +38,24 @@ public class DetailMovieActivityFragment extends Fragment {
         mDateView = (TextView) rootView.findViewById(R.id.releaseDate_textView);
         mRatingView = (TextView) rootView.findViewById(R.id.rating_textView);
         mSynopsisView = (TextView) rootView.findViewById(R.id.synopsis_textView);
+        updateUI();
 
         return rootView;
     }
 
 
     public void setMovie(long movieId) {
-        Movie movie = Cache.getMovieById(movieId);
+        mMovie = Cache.getMovieById(movieId);
+        updateUI();
+    }
 
-        Picasso.with(getContext()).load(movie.getPosterUrl()).into(mPosterView);
-        mTitle.setText(movie.getTitle());
-        mSynopsisView.setText(movie.getOverview());
-        mDateView.setText(movie.getReleaseDate());
-        mRatingView.setText("" + movie.getVoteAverage());
+    public void updateUI() {
+        if (mMovie != null) {
+            Picasso.with(getContext()).load(mMovie.getPosterUrl()).into(mPosterView);
+            mTitle.setText(mMovie.getTitle());
+            mSynopsisView.setText(mMovie.getOverview());
+            mDateView.setText(mMovie.getReleaseDate());
+            mRatingView.setText("" + mMovie.getVoteAverage());
+        }
     }
 }
