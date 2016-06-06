@@ -54,8 +54,21 @@ public class DetailMovieActivityFragment extends Fragment {
             Picasso.with(getContext()).load(mMovie.getPosterUrl()).into(mPosterView);
             mTitle.setText(mMovie.getTitle());
             mSynopsisView.setText(mMovie.getOverview());
-            mDateView.setText(mMovie.getReleaseDate());
-            mRatingView.setText("" + mMovie.getVoteAverage());
+            mDateView.setText(formatDate(mMovie.getReleaseDate()));
+            mRatingView.setText(formatRating(mMovie.getVoteAverage()));
         }
+    }
+
+    private String formatRating(float voteAvg) {
+        return String.format(getContext().getString(R.string.format_rating), voteAvg);
+    }
+
+    /**
+     * @param releaseDate string formatted like : 'YYYY-MM-DD'
+     * @return Return only the year from the releaseDate string formatted like : 'YYYY-MM-DD'
+     */
+    private String formatDate(String releaseDate) {
+        String[] parts = releaseDate.split("-");
+        return parts[0];
     }
 }
