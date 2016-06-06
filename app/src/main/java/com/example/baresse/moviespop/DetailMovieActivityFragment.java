@@ -5,12 +5,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bluejamesbond.text.DocumentView;
 import com.example.baresse.moviespop.data.Cache;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -24,7 +28,11 @@ public class DetailMovieActivityFragment extends Fragment {
     private TextView mDateView;
     private TextView mRatingView;
     private DocumentView mSynopsisView;
-    
+
+    private ToggleButton mFavoriteToggleButton;
+    private IconDrawable noFav;
+    private IconDrawable fav;
+
     public DetailMovieActivityFragment() {
     }
 
@@ -39,11 +47,42 @@ public class DetailMovieActivityFragment extends Fragment {
         mDateView = (TextView) rootView.findViewById(R.id.releaseDate_textView);
         mRatingView = (TextView) rootView.findViewById(R.id.rating_textView);
         mSynopsisView = (DocumentView) rootView.findViewById(R.id.synopsis_textView);
+
+        noFav = new IconDrawable(getContext(), MaterialIcons.md_favorite_border)
+                .colorRes(R.color.colorAccent)
+                .actionBarSize();
+
+        fav = new IconDrawable(getContext(), MaterialIcons.md_favorite)
+                .colorRes(R.color.colorAccent)
+                .actionBarSize();
+
+        mFavoriteToggleButton = (ToggleButton) rootView.findViewById(R.id.toggleButton);
+        mFavoriteToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
+                    mFavoriteToggleButton.setBackgroundDrawable(fav);
+                else
+                    mFavoriteToggleButton.setBackgroundDrawable(noFav);
+            }
+        });
+
+        //TODO: Retrieve state from the database...
+        boolean isFavorite = false;
+        setFavoriteToggle(isFavorite);
+
         updateUI();
 
         return rootView;
     }
 
+    private void setFavoriteToggle(boolean isFavorite) {
+        mFavoriteToggleButton.setChecked(isFavorite);
+        if (isFavorite)
+            mFavoriteToggleButton.setBackgroundDrawable(fav);
+        else
+            mFavoriteToggleButton.setBackgroundDrawable(noFav);
+    }
 
     public void setMovie(long movieId) {
         mMovie = Cache.getMovieById(movieId);
