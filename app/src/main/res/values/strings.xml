@@ -4,11 +4,14 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="reviews_title">REVIEWS</string>
+
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_detail_movie">Detail</string>
 
-    <!-- Rating format -->
+    <!-- Formatting -->
     <string name="format_rating"><xliff:g id="rating">votes: %.1f/10</xliff:g></string>
+    <string name="format_runtime"><xliff:g id="runtime">%d min</xliff:g></string>
 
     <!-- Strings related to Settings -->
     <string name="pref_order_key">order</string>
@@ -77,5 +80,4 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-
 </resources>

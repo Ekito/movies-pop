@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.baresse.moviespop.DetailMovieActivityFragment">
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -53,7 +52,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:src="@mipmap/ic_launcher"
                     android:contentDescription="@string/poster_content_descr" />
 
                 <LinearLayout
@@ -66,16 +64,21 @@
                     <TextView
                         android:id="@+id/releaseDate_textView"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Large Text"
+                        android:layout_height="match_parent"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/runtime_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/rating_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Large Text"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -92,7 +95,31 @@
                     android:id="@+id/synopsis_textView"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    ext:documentView_textSize="16sp"
                     ext:documentView_textAlignment="justified"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/review_title_textView"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textIsSelectable="true" />
+
+                    <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+                        android:id="@+id/reviews_listView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+                    </com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView>
+                </LinearLayout>
+
             </LinearLayout>
 
 

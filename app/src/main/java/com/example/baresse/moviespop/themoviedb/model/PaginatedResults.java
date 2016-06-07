@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Results<T> {
+public class PaginatedResults<T> {
 
     private int page;
 
@@ -23,7 +23,6 @@ public class Results<T> {
     public void setPage(int page) {
         this.page = page;
     }
-
 
     public List<T> getResults() {
         return results;

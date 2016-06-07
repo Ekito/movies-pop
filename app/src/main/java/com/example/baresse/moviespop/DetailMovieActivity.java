@@ -30,7 +30,7 @@ public class DetailMovieActivity extends AppCompatActivity {
 
         DetailMovieActivityFragment fragment = (DetailMovieActivityFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragmentDetail);
-        fragment.setMovie(movieId);
+        fragment.fetchMovie(movieId);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.baresse.moviespop.themoviedb;
 
 
+import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
 import com.example.baresse.moviespop.themoviedb.model.MoviesResult;
 import com.example.baresse.moviespop.themoviedb.model.ReviewsResult;
 import com.example.baresse.moviespop.themoviedb.model.TrailersResult;
@@ -25,13 +26,15 @@ public interface TheMoviesDbService {
     Call<MoviesResult>
     getMoviesOrderedByRating(@Query(API_KEY_PARAM) String apiKey);
 
+    @GET("movie/{id}")
+    Call<MovieDetail>
+    getMovieDetail(@Path("id") long movieId, @Query(API_KEY_PARAM) String apiKey);
+
     @GET("movie/{id}/videos")
     Call<TrailersResult>
-    getMovieTrailers(@Path("id") int movieId, @Query(API_KEY_PARAM) String apiKey);
+    getMovieTrailers(@Path("id") long movieId, @Query(API_KEY_PARAM) String apiKey);
 
     @GET("movie/{id}/reviews")
     Call<ReviewsResult>
-    getMovieReviews(@Path("id") int movieId, @Query(API_KEY_PARAM) String apiKey);
-
-
+    getMovieReviews(@Path("id") long movieId, @Query(API_KEY_PARAM) String apiKey);
 }

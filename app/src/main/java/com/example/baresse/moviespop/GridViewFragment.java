@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.example.baresse.moviespop.tasks.FetchMoviesTask;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
 
 /**
@@ -43,7 +44,7 @@ public class GridViewFragment extends Fragment {
         GridView gv = (GridView) rootView.findViewById(R.id.grid_view);
         mAdapter = new MoviesGridViewAdapter(getContext());
         gv.setAdapter(mAdapter);
-        gv.setOnScrollListener(new MoviesScrollListener(getContext()));
+      //  gv.setOnScrollListener(new MoviesScrollListener(getContext()));
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {

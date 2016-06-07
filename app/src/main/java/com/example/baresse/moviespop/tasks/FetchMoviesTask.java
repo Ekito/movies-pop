@@ -1,8 +1,9 @@
-package com.example.baresse.moviespop;
+package com.example.baresse.moviespop.tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.baresse.moviespop.MoviesGridViewAdapter;
 import com.example.baresse.moviespop.data.Cache;
 import com.example.baresse.moviespop.themoviedb.TheMoviesDbHelper;
 import com.example.baresse.moviespop.themoviedb.model.Movie;

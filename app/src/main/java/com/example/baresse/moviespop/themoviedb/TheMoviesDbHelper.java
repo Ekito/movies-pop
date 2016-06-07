@@ -8,7 +8,10 @@ import android.util.Log;
 import com.example.baresse.moviespop.BuildConfig;
 import com.example.baresse.moviespop.R;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
+import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
 import com.example.baresse.moviespop.themoviedb.model.MoviesResult;
+import com.example.baresse.moviespop.themoviedb.model.ReviewsResult;
+import com.example.baresse.moviespop.themoviedb.model.TrailersResult;
 
 import java.io.IOException;
 import java.util.List;
@@ -61,5 +64,35 @@ public class TheMoviesDbHelper {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public MovieDetail getMovie (long id) {
+
+        Call<MovieDetail> movieDetailCall =
+                service.getMovieDetail(id, BuildConfig.THE_MOVIES_DB_API_KEY);
+
+        Call<TrailersResult> trailersResultCall =
+                service.getMovieTrailers(id, BuildConfig.THE_MOVIES_DB_API_KEY);
+
+        Call<ReviewsResult> reviewsResultCall =
+                service.getMovieReviews(id, BuildConfig.THE_MOVIES_DB_API_KEY);
+
+        MovieDetail foundMovie;
+        try {
+            foundMovie = movieDetailCall.execute().body();
+
+            // Fetch trailers
+            foundMovie.setTrailers(trailersResultCall.execute().body().getResults());
+
+            // Fetch reviews
+            foundMovie.setReviews(reviewsResultCall.execute().body().getResults());
+
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error ", e);
+            e.printStackTrace();
+            return null;
+        }
+
+        return foundMovie;
     }
 }
