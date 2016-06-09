@@ -26,24 +26,28 @@ public class ReviewAdapter extends ArrayAdapter<Review> {
      */
     public static class ViewHolder {
 
-        TextView author;
-        TextView content;
+        public final TextView author;
+        public final TextView content;
+
+        public ViewHolder(View view) {
+            author = (TextView) view.findViewById(R.id.review_author_textView);
+            content = (TextView) view.findViewById(R.id.review_text_textView);
+        }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View rowView;
+        ViewHolder viewHolder;
 
         if (convertView == null) {
             rowView = mInflater.inflate(R.layout.list_item_review, parent, false);
+            viewHolder = new ViewHolder(rowView);
+            rowView.setTag(viewHolder);
         } else {
             rowView = convertView;
+            viewHolder = (ViewHolder) rowView.getTag();
         }
-
-        ViewHolder viewHolder = new ViewHolder();
-        viewHolder.author = (TextView) rowView.findViewById(R.id.review_author_textView);
-        viewHolder.content = (TextView) rowView.findViewById(R.id.review_text_textView);
-        rowView.setTag(viewHolder);
 
         Review item = getItem(position);
         viewHolder.author.setText(item.getAuthor());

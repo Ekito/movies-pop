@@ -28,26 +28,30 @@ public class TrailerAdapter extends ArrayAdapter<Trailer> {
      */
     public static class ViewHolder {
 
-        TextView name;
-        TextView type;
-        ImageView thumb;
+        public final TextView name;
+        public final TextView type;
+        public final ImageView thumb;
+
+        public ViewHolder(View view) {
+            name = (TextView) view.findViewById(R.id.trailer_name_textView);
+            type = (TextView) view.findViewById(R.id.trailer_type_textView);
+            thumb = (ImageView) view.findViewById(R.id.trailer_thumb_imageView);
+        }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View rowView;
+        ViewHolder viewHolder;
 
         if (convertView == null) {
             rowView = mInflater.inflate(R.layout.list_item_trailer, parent, false);
+            viewHolder = new ViewHolder(rowView);
+            rowView.setTag(viewHolder);
         } else {
             rowView = convertView;
+            viewHolder = (ViewHolder) rowView.getTag();
         }
-
-        ViewHolder viewHolder = new ViewHolder();
-        viewHolder.name = (TextView) rowView.findViewById(R.id.trailer_name_textView);
-        viewHolder.type = (TextView) rowView.findViewById(R.id.trailer_type_textView);
-        viewHolder.thumb = (ImageView) rowView.findViewById(R.id.trailer_thumb_imageView);
-        rowView.setTag(viewHolder);
 
         Trailer item = getItem(position);
         viewHolder.name.setText(item.getName());
