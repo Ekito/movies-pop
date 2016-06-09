@@ -1,12 +1,15 @@
 package com.example.baresse.moviespop;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,8 +17,10 @@ import android.widget.ToggleButton;
 
 import com.bluejamesbond.text.DocumentView;
 import com.example.baresse.moviespop.adapter.ReviewAdapter;
+import com.example.baresse.moviespop.adapter.TrailerAdapter;
 import com.example.baresse.moviespop.tasks.FetchMovieDetailsTask;
 import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
+import com.example.baresse.moviespop.themoviedb.model.Trailer;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
@@ -36,11 +41,15 @@ public class DetailMovieActivityFragment extends Fragment {
     private TextView mRatingView;
     private DocumentView mSynopsisView;
 
+    private ExpandableHeightListView mReviewslistView;
+    private ExpandableHeightListView mTrailerslistView;
+
     private ToggleButton mFavoriteToggleButton;
     private IconDrawable noFav;
     private IconDrawable fav;
 
     private ReviewAdapter mReviewAdapter;
+    private TrailerAdapter mTrailerAdapter;
     private Context mContext;
 
     public DetailMovieActivityFragment() {
@@ -61,11 +70,23 @@ public class DetailMovieActivityFragment extends Fragment {
         mRatingView = (TextView) rootView.findViewById(R.id.rating_textView);
         mSynopsisView = (DocumentView) rootView.findViewById(R.id.synopsis_textView);
 
-        ExpandableHeightListView mReviewslistView = (ExpandableHeightListView) rootView.findViewById(R.id.reviews_listView);
+        mReviewslistView = (ExpandableHeightListView) rootView.findViewById(R.id.reviews_listView);
         mReviewAdapter = new ReviewAdapter(getContext(), R.layout.list_item_review);
         mReviewslistView.setAdapter(mReviewAdapter);
         mReviewslistView.setExpanded(true);
 
+        mTrailerslistView = (ExpandableHeightListView) rootView.findViewById(R.id.trailers_listView);
+        mTrailerAdapter = new TrailerAdapter(getContext(), R.layout.list_item_trailer);
+        mTrailerslistView.setAdapter(mTrailerAdapter);
+        mTrailerslistView.setExpanded(true);
+        mTrailerslistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Trailer trailer = mTrailerAdapter.getItem(position);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(trailer.getUrl()));
+                startActivity(intent);
+            }
+        });
         noFav = new IconDrawable(getContext(), MaterialIcons.md_favorite_border)
                 .colorRes(R.color.colorAccent)
                 .actionBarSize();
@@ -113,10 +134,21 @@ public class DetailMovieActivityFragment extends Fragment {
         if (movie != null) {
             mMovie = movie;
             updateUI();
+
+            // Update ReviewAdpater
             mReviewAdapter.clear();
             if (mMovie.getReviews() != null) {
                 mReviewAdapter.addAll(mMovie.getReviews());
             }
+
+            // Update TrailerAdpater
+            mTrailerAdapter.clear();
+            if (mMovie.getTrailers() != null) {
+                mTrailerAdapter.addAll(mMovie.getTrailers());
+            }
+            
+            mReviewslistView.setExpanded(true);
+            mTrailerslistView.setExpanded(true);
         }
     }
 

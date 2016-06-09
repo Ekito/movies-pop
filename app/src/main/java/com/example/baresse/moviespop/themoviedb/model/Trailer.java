@@ -2,6 +2,11 @@ package com.example.baresse.moviespop.themoviedb.model;
 
 public class Trailer {
 
+    private final static String YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
+    private final static String YOUTUBE_THUMBNAIL_BASE_URL = "https://i.ytimg.com/vi/";
+    private final static String YOUTUBE_THUMBNAIL_SUFFIX = "/hqdefault.jpg";
+
+
     private String id;
     private String iso_639_1;
     private String iso_3166_1;
@@ -10,6 +15,22 @@ public class Trailer {
     private String site;
     private int size;
     private String type;
+
+    public String getUrl() {
+        if ("youtube".equalsIgnoreCase(site)) {
+            return YOUTUBE_BASE_URL + key;
+        } else {
+            return "";
+        }
+    }
+
+    public String getThumbnailUrl() {
+        if ("youtube".equalsIgnoreCase(site)) {
+            return YOUTUBE_THUMBNAIL_BASE_URL + key + YOUTUBE_THUMBNAIL_SUFFIX;
+        } else {
+            return "";
+        }
+    }
 
     public String getId() {
         return id;

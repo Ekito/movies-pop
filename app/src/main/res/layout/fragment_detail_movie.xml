@@ -113,6 +113,13 @@
                         android:textIsSelectable="true" />
 
                     <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+                        android:id="@+id/trailers_listView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+                    </com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView>
+
+                    <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
                         android:id="@+id/reviews_listView"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
