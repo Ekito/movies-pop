@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.example.baresse.moviespop.R;
+import com.example.baresse.moviespop.network.PicassoCache;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,10 +51,10 @@ public class MoviesGridViewAdapter extends BaseAdapter {
         // Get the image URL for the current position.
         String url = getItem(position);
 
-        //Picasso.with(mContext).setIndicatorsEnabled(true);
+        PicassoCache.getPicassoInstance(mContext).setIndicatorsEnabled(true);
 
         // Trigger the download of the URL asynchronously into the image view.
-        Picasso.with(mContext) //
+        PicassoCache.getPicassoInstance(mContext)
                 .load(url) //
                 .placeholder(R.drawable.placeholder) //
                 .error(R.drawable.error) //

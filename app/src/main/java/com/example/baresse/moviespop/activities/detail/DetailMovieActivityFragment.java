@@ -20,13 +20,13 @@ import com.example.baresse.moviespop.R;
 import com.example.baresse.moviespop.activities.detail.adapter.ReviewAdapter;
 import com.example.baresse.moviespop.activities.detail.adapter.TrailerAdapter;
 import com.example.baresse.moviespop.data.Favorites;
+import com.example.baresse.moviespop.network.PicassoCache;
 import com.example.baresse.moviespop.tasks.FetchMovieDetailsTask;
 import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
 import com.example.baresse.moviespop.themoviedb.model.Trailer;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
-import com.squareup.picasso.Picasso;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -170,7 +170,7 @@ public class DetailMovieActivityFragment extends Fragment {
             mDateView.setText(formatDate(mMovie.getReleaseDate()));
             mRuntimeView.setText(formatRuntime(mMovie.getRuntime()));
             mRatingView.setText(formatRating(mMovie.getVoteAverage()));
-            Picasso.with(getContext()).load(mMovie.getPosterUrl()).into(mPosterView);
+            PicassoCache.getPicassoInstance(getContext()).load(mMovie.getPosterUrl()).into(mPosterView);
         }
     }
 

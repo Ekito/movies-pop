@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.baresse.moviespop.R;
+import com.example.baresse.moviespop.network.PicassoCache;
 import com.example.baresse.moviespop.themoviedb.model.Trailer;
-import com.squareup.picasso.Picasso;
 
 public class TrailerAdapter extends ArrayAdapter<Trailer> {
 
@@ -56,7 +56,8 @@ public class TrailerAdapter extends ArrayAdapter<Trailer> {
         Trailer item = getItem(position);
         viewHolder.name.setText(item.getName());
         viewHolder.type.setText(item.getType());
-        Picasso.with(getContext()).load(item.getThumbnailUrl()).into(viewHolder.thumb);
+
+        PicassoCache.getPicassoInstance(getContext()).load(item.getThumbnailUrl()).into(viewHolder.thumb);
 
         return rowView;
     }
