@@ -13,4 +13,6 @@ public class MoviePopApplication extends Application {
         super.onCreate();
         Iconify.with(new MaterialModule());
     }
+
+
 }

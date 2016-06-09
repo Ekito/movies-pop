@@ -1,4 +1,4 @@
-package com.example.baresse.moviespop;
+package com.example.baresse.moviespop.activities.main;
 
 import android.content.Context;
 import android.widget.AbsListView;

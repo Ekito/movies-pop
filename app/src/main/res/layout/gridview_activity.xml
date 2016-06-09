@@ -9,5 +9,5 @@
     android:scrollbarStyle="insideOverlay"
     android:scrollbars="none"
     android:listSelector="@null"
-    tools:context="com.example.baresse.moviespop.GridViewFragment"
+    tools:context=".activities.main.GridViewFragment"
     tools:showIn="@layout/activity_main" />

@@ -1,4 +1,4 @@
-package com.example.baresse.moviespop;
+package com.example.baresse.moviespop.activities.main.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.example.baresse.moviespop.R;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
 import com.squareup.picasso.Picasso;
 

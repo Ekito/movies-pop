@@ -1,4 +1,4 @@
-package com.example.baresse.moviespop;
+package com.example.baresse.moviespop.activities.detail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,9 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.bluejamesbond.text.DocumentView;
-import com.example.baresse.moviespop.adapter.ReviewAdapter;
-import com.example.baresse.moviespop.adapter.TrailerAdapter;
+import com.example.baresse.moviespop.R;
+import com.example.baresse.moviespop.activities.detail.adapter.ReviewAdapter;
+import com.example.baresse.moviespop.activities.detail.adapter.TrailerAdapter;
 import com.example.baresse.moviespop.tasks.FetchMovieDetailsTask;
 import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
 import com.example.baresse.moviespop.themoviedb.model.Trailer;
@@ -146,7 +147,7 @@ public class DetailMovieActivityFragment extends Fragment {
             if (mMovie.getTrailers() != null) {
                 mTrailerAdapter.addAll(mMovie.getTrailers());
             }
-            
+
             mReviewslistView.setExpanded(true);
             mTrailerslistView.setExpanded(true);
         }

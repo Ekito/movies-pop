@@ -3,7 +3,7 @@ package com.example.baresse.moviespop.tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.baresse.moviespop.DetailMovieActivityFragment;
+import com.example.baresse.moviespop.activities.detail.DetailMovieActivityFragment;
 import com.example.baresse.moviespop.themoviedb.TheMoviesDbHelper;
 import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
 

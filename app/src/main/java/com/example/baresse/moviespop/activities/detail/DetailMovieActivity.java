@@ -1,10 +1,12 @@
-package com.example.baresse.moviespop;
+package com.example.baresse.moviespop.activities.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.example.baresse.moviespop.R;
 
 public class DetailMovieActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.baresse.moviespop;
+package com.example.baresse.moviespop.activities.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.example.baresse.moviespop.activities.detail.DetailMovieActivity;
+import com.example.baresse.moviespop.R;
+import com.example.baresse.moviespop.activities.main.adapter.MoviesGridViewAdapter;
 import com.example.baresse.moviespop.tasks.FetchMoviesTask;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
 

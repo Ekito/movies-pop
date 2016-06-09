@@ -4,23 +4,24 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="reviews_title">REVIEWS</string>
-
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_detail_movie">Detail</string>
 
     <!-- Formatting -->
-    <string name="format_rating"><xliff:g id="rating">votes: %.1f/10</xliff:g></string>
+    <string name="format_rating"><xliff:g id="rating">%.1f/10</xliff:g></string>
     <string name="format_runtime"><xliff:g id="runtime">%d min</xliff:g></string>
 
     <!-- Strings related to Settings -->
     <string name="pref_order_key">order</string>
     <string name="pref_order_title">Order</string>
+    <string name="pref_order_label_favorites">Favorites</string>
     <string name="pref_order_label_highest_rated">Highest Rated</string>
     <string name="pref_order_label_most_popular">Most Popular</string>
 
+    <string name="pref_order_favorites">favorites</string>
     <string name="pref_order_most_popular">most_popular</string>
     <string name="pref_order_highest_rated">highest_rated</string>
+
     <string name="poster_content_descr">Poster</string>
 
     <!-- Strings related to Settings -->

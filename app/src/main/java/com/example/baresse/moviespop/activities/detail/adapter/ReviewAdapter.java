@@ -1,4 +1,4 @@
-package com.example.baresse.moviespop.adapter;
+package com.example.baresse.moviespop.activities.detail.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
