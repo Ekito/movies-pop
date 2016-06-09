@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.baresse.moviespop.BuildConfig;
 import com.example.baresse.moviespop.R;
+import com.example.baresse.moviespop.data.Favorites;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
 import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
 import com.example.baresse.moviespop.themoviedb.model.MoviesResult;
@@ -43,19 +44,23 @@ public class TheMoviesDbHelper {
     public List<Movie> getMovies() {
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String favorites = mContext.getString(R.string.pref_order_favorites);
         String mostPopular = mContext.getString(R.string.pref_order_most_popular);
         String order = sharedPref.getString(mContext.getString(R.string.pref_order_key), mostPopular);
 
-        Call<MoviesResult> moviesCall;
-
-        if (mostPopular.equals(order)) {
-            Log.d(LOG_TAG, "Fetch Movies ordered by popularity ");
-            moviesCall = service.getMoviesOrderedByPopularity(BuildConfig.THE_MOVIES_DB_API_KEY);
+        if (favorites.equals(order)) {
+            Log.d(LOG_TAG, "Fetch Movies ordered by favorites");
+            return Favorites.getMovies();
+        } else if (mostPopular.equals(order)) {
+            Log.d(LOG_TAG, "Fetch Movies ordered by popularity");
+            return executeCall(service.getMoviesOrderedByPopularity(BuildConfig.THE_MOVIES_DB_API_KEY));
         } else {
-            Log.d(LOG_TAG, "Fetch Movies ordered by rating ");
-            moviesCall = service.getMoviesOrderedByRating(BuildConfig.THE_MOVIES_DB_API_KEY);
+            Log.d(LOG_TAG, "Fetch Movies ordered by rating");
+            return executeCall(service.getMoviesOrderedByRating(BuildConfig.THE_MOVIES_DB_API_KEY));
         }
+    }
 
+    private List<Movie> executeCall(Call<MoviesResult> moviesCall) {
         try {
             MoviesResult result = moviesCall.execute().body();
             return result.getResults();

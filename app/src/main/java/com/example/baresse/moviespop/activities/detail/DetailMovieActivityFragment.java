@@ -19,6 +19,7 @@ import com.bluejamesbond.text.DocumentView;
 import com.example.baresse.moviespop.R;
 import com.example.baresse.moviespop.activities.detail.adapter.ReviewAdapter;
 import com.example.baresse.moviespop.activities.detail.adapter.TrailerAdapter;
+import com.example.baresse.moviespop.data.Favorites;
 import com.example.baresse.moviespop.tasks.FetchMovieDetailsTask;
 import com.example.baresse.moviespop.themoviedb.model.MovieDetail;
 import com.example.baresse.moviespop.themoviedb.model.Trailer;
@@ -97,31 +98,38 @@ public class DetailMovieActivityFragment extends Fragment {
                 .actionBarSize();
 
         mFavoriteToggleButton = (ToggleButton) rootView.findViewById(R.id.toggleButton);
+        mFavoriteToggleButton.setBackgroundDrawable(noFav);
         mFavoriteToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                    mFavoriteToggleButton.setBackgroundDrawable(fav);
-                else
-                    mFavoriteToggleButton.setBackgroundDrawable(noFav);
+                setfavoritetoggleUI(isChecked);
+                updateFavoritesCache(isChecked);
             }
         });
-
-        //TODO: Retrieve state from the database...
-        boolean isFavorite = false;
-        setFavoriteToggle(isFavorite);
 
         updateUI();
 
         return rootView;
     }
 
-    private void setFavoriteToggle(boolean isFavorite) {
+    private void updateFavoritesCache(boolean isFavorite) {
+        if (isFavorite) {
+            Favorites.addMovie(mMovie);
+        }
+        else {
+            Favorites.removeMovie(mMovie.getId());
+        }
+        Favorites.saveFavoritesMovies(getActivity().getBaseContext());
+    }
+
+    private void setfavoritetoggleUI(boolean isFavorite) {
         mFavoriteToggleButton.setChecked(isFavorite);
-        if (isFavorite)
+        if (isFavorite) {
             mFavoriteToggleButton.setBackgroundDrawable(fav);
-        else
+        }
+        else {
             mFavoriteToggleButton.setBackgroundDrawable(noFav);
+        }
     }
 
     public void fetchMovie(long movieId) {
@@ -155,12 +163,14 @@ public class DetailMovieActivityFragment extends Fragment {
 
     public void updateUI() {
         if (mMovie != null) {
-            Picasso.with(getContext()).load(mMovie.getPosterUrl()).into(mPosterView);
+            boolean isFavorite = Favorites.getMovieById(mMovie.getId()) != null;
+            setfavoritetoggleUI(isFavorite);
             mTitle.setText(mMovie.getTitle());
             mSynopsisView.setText(mMovie.getOverview());
             mDateView.setText(formatDate(mMovie.getReleaseDate()));
             mRuntimeView.setText(formatRuntime(mMovie.getRuntime()));
             mRatingView.setText(formatRating(mMovie.getVoteAverage()));
+            Picasso.with(getContext()).load(mMovie.getPosterUrl()).into(mPosterView);
         }
     }
 
