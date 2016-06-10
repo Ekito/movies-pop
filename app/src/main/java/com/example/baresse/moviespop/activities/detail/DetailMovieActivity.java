@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.baresse.moviespop.R;
 
@@ -33,6 +34,17 @@ public class DetailMovieActivity extends AppCompatActivity {
         DetailMovieActivityFragment fragment = (DetailMovieActivityFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragmentDetail);
         fragment.fetchMovie(movieId);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

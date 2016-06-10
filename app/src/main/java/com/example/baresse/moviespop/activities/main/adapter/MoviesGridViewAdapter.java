@@ -28,6 +28,10 @@ public class MoviesGridViewAdapter extends BaseAdapter {
         mContext = context;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
     public void setMovies(Movie[] foundMovies) {
         movies.clear();
         addMovies(foundMovies);
