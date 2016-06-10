@@ -28,8 +28,7 @@ public class MoviesScrollListener extends EndlessScrollListener {
         try {
             Movie[] movies = new FetchMoviesTask(mContext, page).execute().get();
             mAdapter.addMovies(movies);
-
-            return movies.length > 0;
+            return true;
         } catch (InterruptedException | ExecutionException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             return false;

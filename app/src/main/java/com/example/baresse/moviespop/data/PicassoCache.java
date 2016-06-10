@@ -1,4 +1,4 @@
-package com.example.baresse.moviespop.network;
+package com.example.baresse.moviespop.data;
 import android.content.Context;
 import com.squareup.picasso.Downloader;
 import com.squareup.picasso.OkHttpDownloader;

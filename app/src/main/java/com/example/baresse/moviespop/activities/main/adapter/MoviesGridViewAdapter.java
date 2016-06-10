@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.example.baresse.moviespop.R;
-import com.example.baresse.moviespop.network.PicassoCache;
+import com.example.baresse.moviespop.data.PicassoCache;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
 
 import java.util.ArrayList;
