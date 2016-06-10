@@ -35,6 +35,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.7.2'
 
     compile 'com.github.paolorotolo:expandableheightlistview:1.0.0'
-    compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
     compile 'com.joanzapata.iconify:android-iconify-material:2.2.2'
 }

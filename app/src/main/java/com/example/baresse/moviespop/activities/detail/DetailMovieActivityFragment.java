@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.bluejamesbond.text.DocumentView;
 import com.example.baresse.moviespop.R;
 import com.example.baresse.moviespop.activities.detail.adapter.ReviewAdapter;
 import com.example.baresse.moviespop.activities.detail.adapter.TrailerAdapter;
@@ -41,7 +40,7 @@ public class DetailMovieActivityFragment extends Fragment {
     private TextView mDateView;
     private TextView mRuntimeView;
     private TextView mRatingView;
-    private DocumentView mSynopsisView;
+    private TextView mSynopsisView;
 
     private ExpandableHeightListView mReviewslistView;
     private ExpandableHeightListView mTrailerslistView;
@@ -70,7 +69,7 @@ public class DetailMovieActivityFragment extends Fragment {
         mDateView = (TextView) rootView.findViewById(R.id.releaseDate_textView);
         mRuntimeView = (TextView) rootView.findViewById(R.id.runtime_textView);
         mRatingView = (TextView) rootView.findViewById(R.id.rating_textView);
-        mSynopsisView = (DocumentView) rootView.findViewById(R.id.synopsis_textView);
+        mSynopsisView = (TextView) rootView.findViewById(R.id.synopsis_textView);
 
         mReviewslistView = (ExpandableHeightListView) rootView.findViewById(R.id.reviews_listView);
         mReviewAdapter = new ReviewAdapter(getContext(), R.layout.list_item_review);
