@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.example.baresse.moviespop.activities.detail.DetailMovieActivity;
 import com.example.baresse.moviespop.R;
+import com.example.baresse.moviespop.activities.detail.DetailMovieActivity;
 import com.example.baresse.moviespop.activities.main.adapter.MoviesGridViewAdapter;
 import com.example.baresse.moviespop.tasks.FetchMoviesTask;
 import com.example.baresse.moviespop.themoviedb.model.Movie;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * A placeholder fragment containing a grid view.
@@ -23,6 +25,7 @@ public class GridViewFragment extends Fragment {
 
     private final String LOG_TAG = GridViewFragment.class.getSimpleName();
 
+    private GridView gridview;
     private MoviesGridViewAdapter mAdapter;
 
     public GridViewFragment() {
@@ -31,24 +34,18 @@ public class GridViewFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        updateMovies();
-    }
-
-    private void updateMovies() {
-        // Fetch movies from the network
-        Log.d(LOG_TAG, "Update Movies...");
-        new FetchMoviesTask(getContext(), mAdapter).execute();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.gridview_activity, container, false);
 
-        GridView gv = (GridView) rootView.findViewById(R.id.grid_view);
+        gridview = (GridView) rootView.findViewById(R.id.grid_view);
         mAdapter = new MoviesGridViewAdapter(getContext());
-        gv.setAdapter(mAdapter);
-      //  gv.setOnScrollListener(new MoviesScrollListener(getContext()));
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridview.setAdapter(mAdapter);
+        gridview.setOnScrollListener(new MoviesScrollListener(getContext(), mAdapter));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DetailMovieActivity.class);
@@ -59,7 +56,13 @@ public class GridViewFragment extends Fragment {
             }
         });
 
-
+        // Fetch the first page of document
+        try {
+            Movie[] movies = new FetchMoviesTask(getContext(), 0).execute().get();
+            mAdapter.setMovies(movies);
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e(LOG_TAG, e.getMessage(), e);
+        }
         return rootView;
     }
 }

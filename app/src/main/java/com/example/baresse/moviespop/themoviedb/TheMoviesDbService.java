@@ -17,14 +17,15 @@ public interface TheMoviesDbService {
     String BASE_IMG_URL = "http://image.tmdb.org/t/p/";
 
     String API_KEY_PARAM = "api_key";
+    String PAGE_PARAM = "page";
 
     @GET("movie/popular")
     Call<MoviesResult>
-    getMoviesOrderedByPopularity(@Query(API_KEY_PARAM) String apiKey);
+    getMoviesOrderedByPopularity(@Query(API_KEY_PARAM) String apiKey, @Query(PAGE_PARAM) int page);
 
     @GET("movie/top_rated")
     Call<MoviesResult>
-    getMoviesOrderedByRating(@Query(API_KEY_PARAM) String apiKey);
+    getMoviesOrderedByRating(@Query(API_KEY_PARAM) String apiKey, @Query(PAGE_PARAM) int page);
 
     @GET("movie/{id}")
     Call<MovieDetail>

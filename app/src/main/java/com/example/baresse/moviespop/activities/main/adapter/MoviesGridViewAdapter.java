@@ -30,10 +30,14 @@ public class MoviesGridViewAdapter extends BaseAdapter {
 
     public void setMovies(Movie[] foundMovies) {
         movies.clear();
+        addMovies(foundMovies);
+    }
+
+    public void addMovies(Movie[] foundMovies) {
         Collections.addAll(movies, foundMovies);
         Log.d(LOG_TAG, movies.toString());
 
-        this.notifyDataSetInvalidated();
+        this.notifyDataSetChanged();
     }
 
     public Movie getMovie(int position) {

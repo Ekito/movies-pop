@@ -78,22 +78,29 @@ public class TheMoviesDbHelper {
         service = retrofit.create(TheMoviesDbService.class);
     }
 
-    public List<Movie> getMovies() {
+    public List<Movie> getMovies(int pageOffset) {
+
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         String favorites = mContext.getString(R.string.pref_order_favorites);
         String mostPopular = mContext.getString(R.string.pref_order_most_popular);
         String order = sharedPref.getString(mContext.getString(R.string.pref_order_key), mostPopular);
+        int page = 1 + pageOffset;
 
         if (favorites.equals(order)) {
             Log.d(LOG_TAG, "Fetch Movies ordered by favorites");
-            return Favorites.getMovies();
+            if (pageOffset == 0) {
+                return Favorites.getMovies();
+            } else {
+                // No paginated source...
+                return new ArrayList<>();
+            }
         } else if (mostPopular.equals(order)) {
             Log.d(LOG_TAG, "Fetch Movies ordered by popularity");
-            return executeCall(service.getMoviesOrderedByPopularity(BuildConfig.THE_MOVIES_DB_API_KEY));
+            return executeCall(service.getMoviesOrderedByPopularity(BuildConfig.THE_MOVIES_DB_API_KEY, page));
         } else {
             Log.d(LOG_TAG, "Fetch Movies ordered by rating");
-            return executeCall(service.getMoviesOrderedByRating(BuildConfig.THE_MOVIES_DB_API_KEY));
+            return executeCall(service.getMoviesOrderedByRating(BuildConfig.THE_MOVIES_DB_API_KEY, page));
         }
     }
 
